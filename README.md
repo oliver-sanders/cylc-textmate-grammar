@@ -1,3 +1,3 @@
 # cylc-textmate-grammar
 
-Incoming...
+TextMate grammar for Cylc workflow configuration files
