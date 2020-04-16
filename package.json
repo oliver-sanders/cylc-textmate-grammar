@@ -14,5 +14,8 @@
   "bugs": {
     "url": "https://github.com/cylc/cylc-textmate-grammar/issues"
   },
-  "homepage": "https://github.com/cylc/cylc-textmate-grammar#readme"
+  "homepage": "https://github.com/cylc/cylc-textmate-grammar#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
 }
