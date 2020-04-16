@@ -20,11 +20,9 @@ jobs:
     
     # Install dependencies including dev dependencies:
     - name: Install
-      run: |
-        npm install -g eslint
-      # Pipe symbol (|) is for multi-line run command
+      run: npm install
 
     # Run style test(s)
     - name: Style
-      run: eslint src/
+      run: npx eslint src/ lib/
 
