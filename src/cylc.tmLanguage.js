@@ -564,10 +564,6 @@ class IllegalIsoDateTime {
             long: new IsoDateLong(),
             short: new IsoDateShort()
         };
-        const isotime = {
-            long: new IsoTimeLong(),
-            short: new IsoTimeShort()
-        };
         this.patterns = [
             {
                 name: 'invalid.illegal.isodatetime.cylc',
@@ -654,10 +650,10 @@ class IntervalIso {
 
 class IllegalInterval {
     constructor() {
-        const isodatetime = {
-            long: new IsoDateTimeLong,
-            short: new IsoDateTimeShort
-        };
+        // const isodatetime = {
+        //     long: new IsoDateTimeLong,
+        //     short: new IsoDateTimeShort
+        // };
         this.patterns = [
             {
                 name: 'invalid.illegal.interval.cylc',
