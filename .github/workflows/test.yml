@@ -7,6 +7,7 @@ jobs:
   # This workflow contains a single job called "test":
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     # Steps represent a sequence of tasks that will be executed as part of the job:
     steps:
     # Checkout your repository under $GITHUB_WORKSPACE, so your job can access it:
@@ -22,7 +23,13 @@ jobs:
     - name: Install
       run: npm install
 
-    # Run style test(s)
-    - name: Style
+    - name: Style test
       run: npx eslint src/ lib/
 
+    - name: Build
+      run: |
+        cp cylc.tmLanguage.json tmLang_copy.json
+        npm run build
+
+    - name: Check grammar file matches build output
+      run: diff -Z cylc.tmLanguage.json tmLang_copy.json
