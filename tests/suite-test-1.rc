@@ -1,0 +1,43 @@
+# SYNTAX TEST "source.cylc" "Headers & settings"
+
+# Header
+    [foo]
+#   ^ punctuation.definition.tag.begin.cylc
+#       ^ punctuation.definition.tag.end.cylc
+#    ^^^ entity.name.tag.cylc
+#   ^^^^^ meta.section.cylc
+
+# Sub-header
+    [[[foo]]]
+#   ^^^ punctuation.definition.tag.begin.cylc
+#         ^^^ punctuation.definition.tag.end.cylc
+#      ^^^ entity.name.tag.cylc
+
+# Comment
+    [a] # comment
+#       ^ punctuation.definition.comment.cylc
+#       ^^^^^^^^^ comment.line.cylc
+
+# Setting with unquoted value
+    -b b = c=c c
+#   ^^^^ variable.other.key.cylc
+#        ^ keyword.operator.assignment.cylc
+#          ^^^^^ meta.value.cylc string.unquoted.value.cylc
+#   ^^^^^^^^^^^^ meta.setting.cylc
+
+# Setting with double quoted value
+    _d = "e f"
+#   ^^ variable.other.key.cylc
+#        ^ punctuation.definition.string.begin.cylc
+#            ^ punctuation.definition.string.end.cylc
+#        ^^^^^ meta.value.cylc string.quoted.double.cylc
+
+# Illegal 2nd string
+    a = "b" oops # comment
+#           ^^^^ invalid.illegal.string.cylc
+#                ^^^^^^^^^ comment.line.cylc
+
+# Trailing whitespace not illegal
+    e = "f"  # comment
+#          ^^ - invalid.illegal.string.cylc
+#            ^^^^^^^^^ comment.line.cylc
