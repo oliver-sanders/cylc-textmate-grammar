@@ -159,9 +159,11 @@ class StringQuotedDouble extends StringQuotedTriple {
 class IllegalSecondString {
     constructor() {
         this.pattern = {
-            name: 'invalid.illegal.string.cylc',
             comment: 'In this situation, we cannot have string after string, or string on new line',
-            match: `(^|(?<="))[\\t ]*[^#\\n\\r]+`
+            match: `(?:^|(?<="))[\\t ]*+([^#\\n\\r]+)`,
+            captures: {
+                1: {name: 'invalid.illegal.string.cylc'}
+            }
         };
     }
 }
