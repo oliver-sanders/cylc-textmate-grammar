@@ -1,0 +1,30 @@
+# SYNTAX TEST "source.cylc" "Qualifiers"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+graph = """
+
+    foo:fail
+#      ^     punctuation.definition.annotation.cylc
+#       ^^^^ variable.annotation.cylc
+#      ^^^^^ meta.annotation.qualifier.cylc
+
+    foo:succeed-all => bar:custom_a
+#       ^^^^^^^^^^^                 variable.annotation.cylc
+#      ^^^^^^^^^^^^                 meta.annotation.qualifier.cylc
+#                          ^^^^^^^^ variable.annotation.cylc
+#                         ^^^^^^^^^ meta.annotation.qualifier.cylc
+
+    foo[-P1]:fail
+#           ^^^^^ meta.annotation.qualifier.cylc
+
+## Not allowed without task
+:fail
+# <----- - meta.annotation.qualifier.cylc
+
+
+## With Jinja
+    {{ a }}:fail & foo:custom_{{ a }}
+#          ^^^^^                      meta.annotation.qualifier.cylc
+#                      ^^^^^^^        variable.annotation.cylc
+    
+"""

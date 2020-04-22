@@ -1,0 +1,93 @@
+# SYNTAX TEST "source.cylc" "Graph tasks + dependencies"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+## Unquoted graph string
+    graph = foo => bar
+#   ^^^^^              keyword.graph.cylc
+#         ^            keyword.operator.assignment.cylc
+#           ^^^        meta.variable.task.cylc
+#               ^^     keyword.control.trigger.cylc
+#                  ^^^ meta.variable.task.cylc
+#           ^^^^^^^^^^ meta.graph-syntax.unquoted.cylc
+
+## Double quoted graph string
+    graph = "foo => bar"
+#   ^^^^^                keyword.graph.cylc
+#         ^              keyword.operator.assignment.cylc
+#           ^            string.quoted.double.cylc punctuation.definition.string.begin.cylc
+#            ^^^         meta.variable.task.cylc
+#                ^^      keyword.control.trigger.cylc
+#                   ^^^  meta.variable.task.cylc
+#                      ^ string.quoted.double.cylc punctuation.definition.string.end.cylc
+#           ^^^^^^^^^^^^ meta.graph-syntax.quoted.double.cylc
+
+## Multiline
+    graph = """
+#   ^^^^^       keyword.graph.cylc
+#         ^     keyword.operator.assignment.cylc
+#           ^^^ meta.graph-syntax.quoted.triple.cylc string.quoted.triple.cylc punctuation.definition.string.begin.cylc
+    foo => bar
+#   ^^^        meta.variable.task.cylc
+#       ^^     keyword.control.trigger.cylc
+#          ^^^ meta.variable.task.cylc
+#   ^^^^^^^^^^ meta.graph-syntax.quoted.triple.cylc
+
+## No spaces
+    foo=>bar&pub
+#   ^^^          meta.variable.task.cylc
+#      ^^        keyword.control.trigger.cylc
+#        ^^^     meta.variable.task.cylc
+#            ^^^ meta.variable.task.cylc
+
+## Settings not allowed
+    a = b
+#   ^^^^^ - meta.setting.cylc
+
+## Chaining
+    foo => bar => baz
+#              ^^     keyword.control.trigger.cylc
+#                 ^^^ meta.variable.task.cylc
+    foo =>
+#       ^^ keyword.control.trigger.cylc
+    bar
+#   ^^^ meta.variable.task.cylc
+    foo => \
+#       ^^   keyword.control.trigger.cylc
+#          ^ constant.character.escape.continuation.cylc
+
+## With qualifiers etc
+    foo:fail => bar<x=2>
+#   ^^^                  meta.variable.task.cylc
+#               ^^^      meta.variable.task.cylc
+    
+"""
+# <--- meta.graph-syntax.quoted.triple.cylc string.quoted.triple.cylc punctuation.definition.string.end.cylc
+
+## Cylc 8 graph sections
+[[graph]]
+    R1 = foo => bar
+#   ^^              keyword.graph.cylc
+#      ^            keyword.operator.assignment.cylc
+#        ^^^^^^^^^^ meta.graph-syntax.unquoted.cylc
+#   ^^^^^^^^^^^^^^^ meta.graph-section.cylc
+    R2 = """
+#   ^^       keyword.graph.cylc
+#      ^     keyword.operator.assignment.cylc
+#        ^^^ meta.graph-syntax.quoted.triple.cylc string.quoted.triple.cylc punctuation.definition.string.begin.cylc
+#   ^^^^^^^^ meta.graph-section.cylc
+        foo => bar
+#       ^^^^^^^^^^ meta.graph-section.cylc meta.graph-syntax.quoted.triple.cylc
+    """
+#   ^^^ meta.graph-syntax.quoted.triple.cylc string.quoted.triple.cylc punctuation.definition.string.end.cylc
+
+## New section ends graph section
+    [other]
+#   ^^^^^^^ - meta.graph-section.cylc
+    foo => bar
+#   ^^^^^^^^^^ - meta.graph-section.cylc
+
+
+## With Jinja
+[[graph]]
+    {{ a }} = foo => bar
+#             ^^^^^^^^^^ meta.graph-syntax.unquoted.cylc

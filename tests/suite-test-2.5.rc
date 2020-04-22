@@ -1,0 +1,15 @@
+# SYNTAX TEST "source.cylc" "xtriggers"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+graph = """
+
+    @myxtrig1 => foo
+#   ^                punctuation.definition.variable.cylc
+#   ^^^^^^^^^        variable.other.xtrigger.cylc
+
+## With Jinja
+    @myxtrig_{{ a }} => foo
+#   ^                       punctuation.definition.variable.cylc
+#   ^^^^^^^^^               variable.other.xtrigger.cylc
+
+"""

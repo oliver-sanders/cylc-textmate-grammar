@@ -1,0 +1,78 @@
+# SYNTAX TEST "source.cylc" "Sections / Settings"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+## Header
+    [foo]
+#   ^     punctuation.definition.tag.begin.cylc
+#    ^^^  entity.name.tag.cylc
+#       ^ punctuation.definition.tag.end.cylc
+#   ^^^^^ meta.section.cylc
+
+## Sub-header, with commas
+    [[[foo, bar]]]
+#   ^^^            punctuation.definition.tag.begin.cylc
+#      ^^^         entity.name.tag.cylc
+#           ^^^    entity.name.tag.cylc
+#              ^^^ punctuation.definition.tag.end.cylc
+#   ^^^^^^^^^^^^^^ meta.section.cylc
+
+## With Jinja
+    [foo{{ a }}bar]
+#    ^^^            entity.name.tag.cylc
+#              ^^^  entity.name.tag.cylc
+
+
+## Setting with unquoted string value
+    -b b = c=c c
+#   ^^^^         variable.other.key.cylc
+#        ^       keyword.operator.assignment.cylc
+#          ^^^^^ meta.value.cylc string.unquoted.value.cylc
+#   ^^^^^^^^^^^^ meta.setting.cylc
+
+## Setting with no spaces
+    a=b
+#   ^   variable.other.key.cylc
+#    ^  keyword.operator.assignment.cylc
+#     ^ meta.value.cylc
+#   ^^^ meta.setting.cylc
+
+## Setting with double quoted string value
+    _d = "e f"
+#   ^^         variable.other.key.cylc
+#        ^     punctuation.definition.string.begin.cylc
+#            ^ punctuation.definition.string.end.cylc
+#        ^^^^^ meta.value.cylc string.quoted.double.cylc
+#   ^^^^^^^^^^ meta.setting.cylc
+
+## Illegal 2nd string
+    a = "b" oops # comment
+#   ^^^^^^^                meta.setting.cylc
+#           ^^^^           invalid.illegal.string.cylc
+
+## Trailing whitespace not illegal
+    e = "f"  # comment
+#   ^^^^^^^            meta.setting.cylc
+#          ^^          - invalid.illegal.string.cylc
+
+## Allow quotes inside unquoted string
+script = echo "foo"
+#        ^^^^^^^^^^ meta.value.cylc string.unquoted.value.cylc
+
+## With Jinja
+    foo = {{ a }}
+#   ^^^           variable.other.key.cylc
+    foo = {{ a }}_bar
+#   ^^^               variable.other.key.cylc
+#                ^^^^ meta.value.cylc 
+    foo = bar_{{ a }} pub
+#         ^^^^            meta.value.cylc
+#                     ^^^ meta.value.cylc
+
+{{ a }} = foo
+#         ^^^ meta.value.cylc
+{{ a }}_foo = bar
+#      ^^^^       variable.other.key.cylc
+#             ^^^ meta.value.cylc
+    foo_{{ a }}_bar = pub
+#   ^^^^                  variable.other.key.cylc
+#              ^^^^       variable.other.key.cylc

@@ -1,0 +1,22 @@
+# SYNTAX TEST "source.cylc" "Include files"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+## Unquoted
+    %include bar
+#   ^^^^^^^^     keyword.control.include.cylc
+#            ^^^ string.cylc
+#   ^^^^^^^^^^^^ meta.include.cylc
+
+## Quoted with spaces etc
+    %include "baz/bo ol"
+#   ^^^^^^^^             keyword.control.include.cylc
+#            ^^^^^^^^^^^ string.cylc
+#   ^^^^^^^^^^^^^^^^^^^^ meta.include.cylc
+
+## With jinja
+    %include {{ a }}
+#   ^^^^^^^^         keyword.control.include.cylc
+    %include foo {{ a }} bar
+#   ^^^^^^^^                 keyword.control.include.cylc
+#            ^^^             string.cylc
+#                        ^^^ string.cylc

@@ -1,0 +1,37 @@
+# SYNTAX TEST "source.cylc" "Multiline string"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+## One line
+a = """foo"""
+#   ^^^       punctuation.definition.string.begin.cylc
+#         ^^^ punctuation.definition.string.end.cylc
+#   ^^^^^^^^^ string.quoted.triple.cylc
+
+## Multiline
+a = """
+#   ^^^ string.quoted.triple.cylc punctuation.definition.string.begin.cylc
+    foo
+#   ^^^ string.quoted.triple.cylc
+"""
+# <--- string.quoted.triple.cylc punctuation.definition.string.end.cylc
+
+## Illegal 2nd string
+a = """
+    foo
+""" oops
+#   ^^^^ invalid.illegal.string.cylc
+
+## Trailing whitespace not illegal
+a = """
+    foo
+"""  # comment
+#  ^^          - invalid.illegal.string.cylc
+
+## Non-triple quoted strings
+a = 
+    foo
+#   ^^^ - meta.value.cylc string.unquoted.value.cylc
+a = "
+    foo
+#   ^^^ - meta.value.cylc string.quoted.double.cylc
+"

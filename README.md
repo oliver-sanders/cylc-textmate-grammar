@@ -144,8 +144,8 @@ npx eslint src/ lib/
 We're using [vscode-tmgrammar-test](https://github.com/PanAeon/vscode-tmgrammar-test) for testing the textmate grammar. Test files reside in the `/tests` directory. These are essentially suite.rc files that are annotated with comments (filenames must match pattern `suite*.rc` or `suite*.rc.*`). The comments detail what the expected scopes of the test line are. The comments are read in by vscode-tmgrammar-test and compared to the actual applied scopes. An example test might be:
 ```ini
     foo = bar
-#   ^^^ variable.other.key.cylc
-#       ^ keyword.operator.assignment.cylc
+#   ^^^       variable.other.key.cylc
+#       ^     keyword.operator.assignment.cylc
 #         ^^^ meta.value.cylc string.unquoted.value.cylc
 #   ^^^^^^^^^ meta.setting.cylc
 ```

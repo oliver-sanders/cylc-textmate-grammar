@@ -1,0 +1,18 @@
+# SYNTAX TEST "source.cylc" "Graph comments"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+graph = """ # comment
+#           ^         punctuation.definition.comment.cylc
+#           ^^^^^^^^^ comment.line.cylc
+
+    # comment
+#   ^         punctuation.definition.comment.cylc
+#   ^^^^^^^^^ comment.line.cylc
+
+    foo => bar # comment
+#              ^         punctuation.definition.comment.cylc
+#              ^^^^^^^^^ comment.line.cylc
+
+""" # comment
+#   ^         punctuation.definition.comment.cylc
+#   ^^^^^^^^^ comment.line.cylc
