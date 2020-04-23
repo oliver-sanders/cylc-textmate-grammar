@@ -90,4 +90,5 @@
 ## With Jinja
 [[graph]]
     {{ a }} = foo => bar
+#           ^            keyword.operator.assignment.cylc
 #             ^^^^^^^^^^ meta.graph-syntax.unquoted.cylc

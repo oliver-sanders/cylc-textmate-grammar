@@ -27,11 +27,11 @@ a = """
 """  # comment
 #  ^^          - invalid.illegal.string.cylc
 
-## Non-triple quoted strings
+## Non-triple quoted strings not allowed
 a = 
     foo
 #   ^^^ - meta.value.cylc string.unquoted.value.cylc
 a = "
     foo
-#   ^^^ - meta.value.cylc string.quoted.double.cylc
+#   ^^^ invalid.illegal.string.cylc
 "

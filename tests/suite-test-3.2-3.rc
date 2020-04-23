@@ -11,8 +11,8 @@
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
 
     {{ foo_bar }}  {{ foo | bar(1, 2, 3) }}
-#   ^^                                      punctuation.definition.template-statement.begin.jinja
-#              ^^                           punctuation.definition.template-statement.end.jinja
+#   ^^                                      punctuation.definition.template-expression.begin.jinja
+#              ^^                           punctuation.definition.template-expression.end.jinja
 #   ^^^^^^^^^^^^^                           meta.embedded.block.jinja source.jinja
 #                ^^                         - meta.embedded.block.jinja source.jinja
 #                  ^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
@@ -93,3 +93,7 @@ graph = """
 #       ^^^^^^^                   meta.embedded.block.jinja source.jinja
 #                        ^^^^^^^  meta.embedded.block.jinja source.jinja
 """
+
+[[graph]]
+    {{ a }} = foo => bar
+#   ^^^^^^^              meta.embedded.block.jinja source.jinja
