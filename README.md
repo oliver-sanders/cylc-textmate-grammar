@@ -56,6 +56,8 @@ class GraphSyntax {
 ```
 Notice above the inclusion of the class `Task`'s pattern object.
 
+Remember that the regex escape character `\` needs to be itself escaped. E.g., for the regex `\s` you need to write `\\s`.
+
 The `exports.tmLanguage` object is where the collection of patterns should go, i.e.:
 ```javascript
 exports.tmLanguage = {
@@ -121,4 +123,35 @@ The compiled result of the examples above would be the following `cylc.tmLanguag
         }
     }
 }
+```
+
+### Testing
+
+(Note: if you're unable to run the tests locally, GitHub Actions are set up to automatically run the tests on pull requests.)
+
+If you haven't already installed the development dependencies, run
+```
+npm install
+```
+
+#### Style tests
+To run ESLint for style testing JavaScript files:
+```
+npx eslint src/ lib/
+```
+
+#### Unit tests
+We're using [vscode-tmgrammar-test](https://github.com/PanAeon/vscode-tmgrammar-test) for testing the textmate grammar. Test files reside in the `/tests` directory. These are essentially suite.rc files that are annotated with comments (filenames must match pattern `suite*.rc` or `suite*.rc.*`). The comments detail what the expected scopes of the test line are. The comments are read in by vscode-tmgrammar-test and compared to the actual applied scopes. An example test might be:
+```ini
+    foo = bar
+#   ^^^       variable.other.key.cylc
+#       ^     keyword.operator.assignment.cylc
+#         ^^^ meta.value.cylc string.unquoted.value.cylc
+#   ^^^^^^^^^ meta.setting.cylc
+```
+For docs, follow the link to vscode-tmgrammar-test above.
+
+To run the unit tests:
+```
+npm test
 ```

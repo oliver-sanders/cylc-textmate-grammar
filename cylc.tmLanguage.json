@@ -105,11 +105,19 @@
                             "include": "#comments"
                         },
                         {
-                            "begin": "([\\w\\+\\^\\$][\\w\\+\\-\\^\\$\\/\\t ,:]*)(=)[\\t ]*",
+                            "begin": "(\\S[^=#]*)(=)[\\t ]*",
                             "end": "(?=[#\\n\\r])",
                             "beginCaptures": {
                                 "1": {
-                                    "name": "keyword.graph.cylc"
+                                    "patterns": [
+                                        {
+                                            "include": "#jinja2"
+                                        },
+                                        {
+                                            "name": "keyword.graph.cylc",
+                                            "match": "[\\w\\+\\^\\$][\\w\\+\\-\\^\\$\\/\\t ,:]*"
+                                        }
+                                    ]
                                 },
                                 "2": {
                                     "name": "keyword.operator.assignment.cylc"
@@ -303,6 +311,9 @@
                     },
                     "patterns": [
                         {
+                            "include": "#jinja2"
+                        },
+                        {
                             "include": "#intervals"
                         },
                         {
@@ -334,7 +345,7 @@
             "patterns": [
                 {
                     "name": "meta.setting.cylc",
-                    "begin": "(\\S[^=#\\n\\r]+?)[\\t ]*(=)[\\t ]*",
+                    "begin": "([^=#\\s][^=#\\n\\r]*?)?[\\t ]*(=)[\\t ]*",
                     "end": "(?=[#\\n\\r])",
                     "beginCaptures": {
                         "1": {
@@ -344,7 +355,7 @@
                                 },
                                 {
                                     "name": "variable.other.key.cylc",
-                                    "match": "\\b[\\w\\-\\t ]+\\b"
+                                    "match": "[\\w\\-\\t ]+"
                                 }
                             ]
                         },

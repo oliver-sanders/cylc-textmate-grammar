@@ -83,7 +83,7 @@ class Setting {
     constructor() {
         this.pattern = {
             name: 'meta.setting.cylc',
-            begin: `(\\S[^=#\\n\\r]+?)[\\t ]*(=)[\\t ]*`,
+            begin: `([^=#\\s][^=#\\n\\r]*?)?[\\t ]*(=)[\\t ]*`,
             end: `(?=[#\\n\\r])`, // Will match after subexps in patterns below have finished (i.e. subexps win; end can be dragged onto another line)
             beginCaptures: {
                 1: {
@@ -91,7 +91,7 @@ class Setting {
                         {include: '#jinja2'},
                         {
                             name: 'variable.other.key.cylc',
-                            match: `\\b[\\w\\-\\t ]+\\b`,
+                            match: `[\\w\\-\\t ]+`,
                         }
                     ]
                 },
@@ -246,9 +246,20 @@ class GraphSection8 extends GraphSection7 {
             patterns: [
                 {include: '#comments'},
                 {
-                    begin: `([\\w\\+\\^\\$][\\w\\+\\-\\^\\$\\/\\t ,:]*)(=)[\\t ]*`, // @TODO: need to implement recurrence syntax properly
+                    begin: `(\\S[^=#]*)(=)[\\t ]*`,
                     end: inherit.end,
-                    beginCaptures: inherit.beginCaptures,
+                    beginCaptures: {
+                        1: {
+                            patterns: [
+                                {include: '#jinja2'},
+                                {
+                                    name: 'keyword.graph.cylc',
+                                    match: `[\\w\\+\\^\\$][\\w\\+\\-\\^\\$\\/\\t ,:]*` // @TODO: need to implement recurrence syntax properly
+                                }
+                            ]
+                        },
+                        2: {name: 'keyword.operator.assignment.cylc'},
+                    },
                     patterns: inherit.patterns
                 }
             ]
@@ -319,6 +330,7 @@ class GraphSyntax {
                     0: {name: 'punctuation.section.brackets.end.cylc'}
                 },
                 patterns: [
+                    {include: '#jinja2'},
                     {include: '#intervals'},
                     {include: '#isodatetimes'},
                     {

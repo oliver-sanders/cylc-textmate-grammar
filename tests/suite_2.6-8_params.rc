@@ -1,0 +1,56 @@
+# SYNTAX TEST "source.cylc" "Parameters"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+graph = """
+
+    <x> => bar<y>
+#   ^             punctuation.definition.annotation.begin.cylc
+#    ^            variable.parameter.cylc
+#     ^           punctuation.definition.annotation.end.cylc
+#   ^^^           meta.annotation.parameterization.cylc
+#             ^^^ meta.annotation.parameterization.cylc
+
+## With operators & numbers
+    <x-1> => <x + 1>
+#    ^               variable.parameter.cylc
+#     ^              keyword.operator.arithmetic.cylc
+#      ^             constant.numeric.cylc
+#   ^^^^^            meta.annotation.parameterization.cylc
+#             ^      variable.parameter.cylc
+#               ^    keyword.operator.arithmetic.cylc
+#                 ^  constant.numeric.cylc
+#            ^^^^^^^ meta.annotation.parameterization.cylc
+
+## With assignment
+    a<x=1> => a<x = bar>
+#     ^                  variable.parameter.cylc
+#      ^                 keyword.operator.assignment.cylc
+#       ^                constant.numeric.cylc
+#    ^^^^^               meta.annotation.parameterization.cylc
+#               ^        variable.parameter.cylc
+#                 ^      keyword.operator.assignment.cylc
+#                   ^^^  variable.other.cylc
+
+## Multiple params
+    a<x=bar, y = 2> => a<baz,4>
+#          ^                    punctuation.separator.parameter.cylc
+#            ^                  variable.parameter.cylc
+#              ^                keyword.operator.assignment.cylc
+#                ^              constant.numeric.cylc
+#                           ^   punctuation.separator.parameter.cylc
+#                            ^  variable.parameter.cylc
+
+
+## With Jinja
+    foo<{{ a }}>
+#      ^         punctuation.definition.annotation.begin.cylc
+#              ^ punctuation.definition.annotation.end.cylc
+    <x_{{ a }}_y>
+#    ^^                                       variable.parameter.cylc
+#             ^^                              variable.parameter.cylc
+
+"""
+
+## Parameterised header
+    [foo<bar>]
+#       ^^^^^  meta.annotation.parameterization.cylc

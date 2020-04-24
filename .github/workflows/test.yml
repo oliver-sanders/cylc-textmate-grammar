@@ -19,8 +19,7 @@ jobs:
       with:
         node-version: '10.x'
     
-    # Install dependencies including dev dependencies:
-    - name: Install
+    - name: Install (dev) dependencies
       run: npm install
 
     - name: Style test
@@ -28,8 +27,11 @@ jobs:
 
     - name: Build
       run: |
-        cp cylc.tmLanguage.json tmLang_copy.json
+        mv cylc.tmLanguage.json tmLang_copy.json
         npm run build
 
     - name: Check grammar file matches build output
       run: diff -Z cylc.tmLanguage.json tmLang_copy.json
+    
+    - name: Unit tests
+      run: npm test

@@ -1,0 +1,98 @@
+# SYNTAX TEST "source.cylc" "Inter-cycle dependencies"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+graph = """
+
+## Integer intervals
+    foo[P1] & bar[-P1]
+#      ^               punctuation.section.brackets.begin.cylc
+#       ^^             constant.numeric.interval.integer.cylc
+#         ^            punctuation.section.brackets.end.cylc
+#      ^^^^            meta.annotation.inter-cycle.cylc
+#                 ^    keyword.operator.arithmetic.cylc
+#                ^^^^  meta.annotation.inter-cycle.cylc
+
+## ISO 8601 intervals
+    foo[P1D] & bar[-P1D]
+#       ^^^              constant.numeric.interval.iso.cylc
+#                  ^     keyword.operator.arithmetic.cylc
+#                   ^^^  constant.numeric.interval.iso.cylc
+    foo[P1DT1M] & bar[PT1M] & pub[P1Y1M1DT1H1M1S] & qux[P1W]
+#       ^^^^^^                                               constant.numeric.interval.iso.cylc
+#                     ^^^^                                   constant.numeric.interval.iso.cylc
+#                                 ^^^^^^^^^^^^^^             constant.numeric.interval.iso.cylc
+#                                                       ^^^  constant.numeric.interval.iso.cylc
+
+## Integer points
+    foo[123] & bar[-12]
+#       ^^^             constant.numeric.integer-point.cylc
+#                   ^^  constant.numeric.integer-point.cylc
+
+## ISO 8601 points (long)
+    foo[2000-01-01T00:00:00-11:30]
+#           ^                      punctuation.separator.date.cylc
+#                    ^             punctuation.separator.time.cylc
+#                          ^       punctuation.definition.timezone.cylc
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^  constant.numeric.isodatetime.long.cylc
+    foo[2000-01-01T00:00Z] & foo[2000-01-01T00+05]
+#                       ^                          punctuation.definition.timezone.cylc
+#       ^^^^^^^^^^^^^^^^^                          constant.numeric.isodatetime.long.cylc
+#                                             ^    punctuation.definition.timezone.cylc
+#                                ^^^^^^^^^^^^^^^^  constant.numeric.isodatetime.long.cylc
+
+    foo[2000-01-01] & foo[2000-00] & foo[2000]
+#       ^^^^^^^^^^                             constant.numeric.isodatetime.long.cylc
+#                         ^^^^^^^              constant.numeric.isodatetime.long.cylc
+#                                        ^^^^  constant.numeric.isodatetime.long.cylc
+
+## ISO 8601 points (short)
+    foo[20051201T0215+0530] & foo[20051201T123000Z]
+#                    ^                              punctuation.definition.timezone.cylc
+#       ^^^^^^^^^^^^^^^^^^                          constant.numeric.isodatetime.short.cylc
+#                                                ^  punctuation.definition.timezone.cylc
+#                                 ^^^^^^^^^^^^^^^^  constant.numeric.isodatetime.short.cylc
+    foo[20000000T00-11] & foo[20000000T0000]
+#                  ^                         punctuation.definition.timezone.cylc
+#       ^^^^^^^^^^^^^^                       constant.numeric.isodatetime.short.cylc
+#                             ^^^^^^^^^^^^^  constant.numeric.isodatetime.short.cylc
+
+## Bultins
+    foo[^]
+#       ^  constant.language.cycle-point.cylc
+#      ^^^ meta.annotation.inter-cycle.cylc
+
+## Arithmetic
+    foo[^+P1D] & foo[20000101T0000+P1D] & foo[2+P1]
+#        ^                                          keyword.operator.arithmetic.cylc
+#      ^^^^^^^                                      meta.annotation.inter-cycle.cylc
+#                                 ^                 keyword.operator.arithmetic.cylc
+#                   ^^^^^^^^^^^^^^^^^^^             meta.annotation.inter-cycle.cylc
+#                                              ^    keyword.operator.arithmetic.cylc
+
+## Illegal intervals
+    foo[P1H]
+#       ^^^  invalid.illegal.interval.cylc
+    foo[P1D1Y] & foo[PT1M1H]
+#       ^^^^^                - constant.numeric.interval.iso.cylc
+#                    ^^^^^^  - constant.numeric.interval.iso.cylc
+    foo[P] & foo[PT]
+#       ^            - constant.numeric.interval.integer.cylc constant.numeric.interval.iso.cylc
+#                ^^  - constant.numeric.interval.integer.cylc constant.numeric.interval.iso.cylc
+
+## Illegal ISO points
+    foo[200T00] & foo[2000T00Z] & foo[2000T00-01] & foo[200012T00]
+#       ^^^^^^                                                     invalid.illegal.isodatetime.cylc
+#                     ^^^^^^^^                                     invalid.illegal.isodatetime.cylc
+#                                     ^^^^^^^                      invalid.illegal.isodatetime.cylc
+#                                                       ^^^^^^^^^  invalid.illegal.isodatetime.cylc
+    foo[2000-01-01T0000] & foo[20000101T0000+10:00] & foo[20000101T00:00]
+#       ^^^^^^^^^^^^^^^                                                   invalid.illegal.isodatetime.cylc
+#                              ^^^^^^^^^^^^^^^^^^^                        invalid.illegal.isodatetime.cylc
+#                                                         ^^^^^^^^^^^^^^  invalid.illegal.isodatetime.cylc
+    foo[01-01T00] & foo[01T00] & foo[T00] & foo[T-00]
+#       ^^^^^^^^                                      - constant.numeric.isodatetime.long.cylc constant.numeric.isodatetime.short.cylc
+#                       ^^^^^                         - constant.numeric.isodatetime.long.cylc constant.numeric.isodatetime.short.cylc
+#                                    ^^^              - constant.numeric.isodatetime.long.cylc constant.numeric.isodatetime.short.cylc
+#                                               ^^^^  - constant.numeric.isodatetime.long.cylc constant.numeric.isodatetime.short.cylc
+
+"""

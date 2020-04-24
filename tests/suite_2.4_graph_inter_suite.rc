@@ -1,0 +1,35 @@
+# SYNTAX TEST "source.cylc" "Inter-suite polling"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+graph = """
+
+    poller<other.suite::foo> => bar
+#         ^                         punctuation.definition.annotation.begin.cylc
+#          ^^^^^^^^^^^              entity.name.namespace.suite.cylc
+#                     ^^            punctuation.accessor.cylc
+#                       ^^^         meta.variable.task.cylc
+#                          ^        punctuation.definition.annotation.end.cylc
+#         ^^^^^^^^^^^^^^^^^^        meta.annotation.parameterization.cylc
+
+## With qualifier (inside/outside)
+    poller<other-suite::foo:fail> => bar
+#          ^^^^^^^^^^^                   entity.name.namespace.suite.cylc
+#                          ^^^^^         meta.annotation.qualifier.cylc
+    poller<other.suite::foo>:start => bar
+#                            ^^^^^        meta.annotation.qualifier.cylc
+
+## No spaces allowed in suite name
+    poller<oops suite::foo>
+#          ^^^^             - entity.name.namespace.suite.cylc
+#               ^^^^^       entity.name.namespace.suite.cylc
+
+
+## With Jinja
+    poller<{{ a }}::foo>
+#                 ^^     punctuation.accessor.cylc
+#                   ^^^  meta.variable.task.cylc
+    poller<other-suite::{{ a }}>
+#          ^^^^^^^^^^^           entity.name.namespace.suite.cylc
+#                     ^^         punctuation.accessor.cylc
+"""
+

@@ -1,0 +1,99 @@
+# SYNTAX TEST "source.cylc" "Jinja2"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+## Single line
+    {% set foo = "bar" %}
+#   ^^                    punctuation.definition.template-expression.begin.jinja
+#                      ^^ punctuation.definition.template-expression.end.jinja
+#   ^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
+
+    {% set foo = '%s' % 'bar' %}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
+
+    {{ foo_bar }}  {{ foo | bar(1, 2, 3) }}
+#   ^^                                      punctuation.definition.template-expression.begin.jinja
+#              ^^                           punctuation.definition.template-expression.end.jinja
+#   ^^^^^^^^^^^^^                           meta.embedded.block.jinja source.jinja
+#                ^^                         - meta.embedded.block.jinja source.jinja
+#                  ^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
+
+    {% set foo = {"1": 2, "3", {"1": 2}} %}
+#                                     ^^    - punctuation.definition.template-expression.end.jinja
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
+
+    {# a comment #} foo
+#   ^^                  punctuation.definition.comment.begin.jinja
+#                ^^     punctuation.definition.comment.end.jinja
+#   ^^^^^^^^^^^^^^^     comment.block.jinja
+#                  ^^^^ - comment.block.jinja source.jinja
+
+## Multiline
+    {% import 'foo'
+#   ^^              punctuation.definition.template-expression.begin.jinja
+#   ^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
+        set foo = {"1": 2, "3", []}
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
+    %}
+#   ^^ punctuation.definition.template-expression.end.jinja
+
+    {# foo
+#   ^^     punctuation.definition.comment.begin.jinja
+#   ^^^^^^ comment.block.jinja
+        bar
+# ^^^^^^^^^ comment.block.jinja
+        pub #}
+#           ^^ punctuation.definition.comment.end.jinja
+# ^^^^^^^^^^^^ comment.block.jinja
+
+## Whitespace control
+    {%+ foo -%} {%- foo %}
+#   ^^^                    punctuation.definition.template-expression.begin.jinja
+#           ^^^            punctuation.definition.template-expression.end.jinja
+#               ^^^        punctuation.definition.template-expression.begin.jinja
+
+
+## Inside Cylc syntax patterns
+a = {{ b }} c_{{ d }}
+#   ^^^^^^^           meta.embedded.block.jinja source.jinja
+#             ^^^^^^^ meta.embedded.block.jinja source.jinja
+    a_{{ b }} = c
+#     ^^^^^^^     meta.embedded.block.jinja source.jinja
+
+    [[foo{{ a }}]]
+#        ^^^^^^^   meta.embedded.block.jinja source.jinja
+
+a = """
+    {{ a }}
+#   ^^^^^^^ meta.embedded.block.jinja source.jinja
+"""
+
+graph = """
+    {{ a }}
+#   ^^^^^^^ meta.embedded.block.jinja source.jinja
+
+    poller<{{ a }}::foo> & poller<a-{{ b }}::foo>
+#          ^^^^^^^                                meta.embedded.block.jinja source.jinja
+#                                   ^^^^^^^       meta.embedded.block.jinja source.jinja
+    poller<other-suite::{{ a }}>
+#                       ^^^^^^^  meta.embedded.block.jinja source.jinja
+
+    @myxtrig_{{ a }}
+#            ^^^^^^^ meta.embedded.block.jinja source.jinja
+
+    foo<{{ a }}> & bar<x={{ b }}>
+#       ^^^^^^^                   meta.embedded.block.jinja source.jinja
+#                         ^^^^^^  meta.embedded.block.jinja source.jinja
+
+    foo:{{ a }} & bar:custom_{{ b }} & {{ c }}:fail
+#       ^^^^^^^                                     meta.embedded.block.jinja source.jinja
+#                            ^^^^^^^                meta.embedded.block.jinja source.jinja
+#                                      ^^^^^^^      meta.embedded.block.jinja source.jinja
+
+    foo[{{ a }}] & bar[-P{{ b }}]
+#       ^^^^^^^                   meta.embedded.block.jinja source.jinja
+#                        ^^^^^^^  meta.embedded.block.jinja source.jinja
+"""
+
+[[graph]]
+    {{ a }} = foo => bar
+#   ^^^^^^^              meta.embedded.block.jinja source.jinja

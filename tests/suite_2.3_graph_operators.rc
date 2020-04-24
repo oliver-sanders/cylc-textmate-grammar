@@ -1,0 +1,40 @@
+# SYNTAX TEST "source.cylc" "Graph operators"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+graph = """
+
+## Operators
+    foo | bar & baz => pub & qux
+#       ^                        keyword.other.logical.cylc
+#             ^                  keyword.other.logical.cylc
+#                          ^     keyword.other.logical.cylc
+
+## Without spaces
+    foo&bar => pub
+#      ^           keyword.other.logical.cylc
+#      ^           - meta.variable.task.cylc
+
+## Parentheses
+    (foo | bar) => pub
+#   ^                  punctuation.section.parens.begin.cylc
+#        ^             keyword.other.logical.cylc
+#             ^        punctuation.section.parens.end.cylc
+#   ^^^^^^^^^^^        meta.parens.cylc
+
+## Suicide
+    foo => !foo &!bar =>
+#          ^          keyword.other.suicide.cylc
+#           ^^^       meta.variable.task.cylc
+#          ^^^^       meta.variable.suicide.cylc
+#               ^     keyword.other.logical.cylc
+#                ^    keyword.other.suicide.cylc
+!qux =>!pub
+# <-        keyword.other.suicide.cylc
+#      ^    keyword.other.suicide.cylc
+
+## Not suicide
+    foo!bar => ! foo
+#      ^             - keyword.other.suicide.cylc
+#              ^     - keyword.other.suicide.cylc
+
+"""

@@ -1,0 +1,53 @@
+# SYNTAX TEST "source.cylc" "Comments"
+# See https://github.com/cylc/cylc-flow/issues/2752
+
+## On its own
+    # comment
+#   ^         punctuation.definition.comment.cylc
+#   ^^^^^^^^^ comment.line.cylc
+
+## After header
+[a] # comment
+#   ^         punctuation.definition.comment.cylc
+#   ^^^^^^^^^ comment.line.cylc
+
+## After setting
+a = b # comment
+#     ^         punctuation.definition.comment.cylc
+#     ^^^^^^^^^ comment.line.cylc
+
+## After multiline string
+a = """
+    foo
+""" # comment
+#   ^         punctuation.definition.comment.cylc
+#   ^^^^^^^^^ comment.line.cylc
+
+## After include
+%include foo # comment
+#            ^         punctuation.definition.comment.cylc
+#            ^^^^^^^^^ comment.line.cylc
+
+## Inside graph string
+graph = foo => bar # comment
+#                  ^         punctuation.definition.comment.cylc
+#                  ^^^^^^^^^ comment.line.cylc
+graph = """ # comment
+#           ^         punctuation.definition.comment.cylc
+#           ^^^^^^^^^ comment.line.cylc
+    foo => bar # comment
+#              ^^^^^^^^^ comment.line.cylc
+"""
+
+## Not inside quoted strings
+a = "b # not a comment"
+#      ^^^^^^^^^^^^^^^ - comment.line.cylc
+a = """ # not a comment
+#       ^^^^^^^^^^^^^^^ - comment.line.cylc
+    foo # not a comment
+#       ^^^^^^^^^^^^^^^ - comment.line.cylc
+"""
+
+## After Jinja
+{{ a }} # comment
+#       ^^^^^^^^^ comment.line.cylc
