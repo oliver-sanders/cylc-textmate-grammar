@@ -1,5 +1,7 @@
 # cylc-textmate-grammar
 
+![test](https://github.com/cylc/cylc-textmate-grammar/workflows/test/badge.svg?branch=master&event=push)
+
 This repository provides a TextMate grammar for Cylc workflow configuration (`suite.rc`) files, enabling syntax highlighting and other features.
 
 `cylc.tmLanguage.json` is the grammar file used by plugins for editors:
