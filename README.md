@@ -8,7 +8,11 @@ This repository provides a TextMate grammar for Cylc workflow configuration (`su
 - VSCode - [cylc/vscode-cylc](https://github.com/cylc/vscode-cylc)
 - Atom (in future)
 
-Currently we do not have a TextMate bundle but we're working on it.
+It is also used to build a TextMate bundle at [cylc/Cylc.tmLanguage](https://github.com/cylc/Cylc.tmbundle/) which is compatible with:
+- TextMate
+- PyCharm
+- WebStorm
+- Sublime Text 3
 
 ## Usage
 
