@@ -251,7 +251,7 @@ class GraphSection8 extends GraphSection7 {
             contentName: 'meta.graph-section.cylc',
             comment: 'Cylc 8 graph syntax',
             begin: `\\[{2}[\\t ]*graph[\\t ]*\\]{2}`,
-            end: `(?=^[\t ]*\\[)`,
+            end: `(?=^[\\t ]*\\[)`,
             beginCaptures: {
                 0: {
                     patterns: [
