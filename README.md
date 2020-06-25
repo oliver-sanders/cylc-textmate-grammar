@@ -6,7 +6,7 @@ This repository provides a TextMate grammar for Cylc workflow configuration (`su
 
 `cylc.tmLanguage.json` is the grammar file used by plugins for editors:
 - VSCode - [cylc/vscode-cylc](https://github.com/cylc/vscode-cylc)
-- Atom (in future)
+- Atom - [cylc/language-cylc](https://github.com/cylc/language-cylc)
 
 It is also used to build a TextMate bundle at [cylc/Cylc.tmLanguage](https://github.com/cylc/Cylc.tmbundle/) which is compatible with:
 - TextMate

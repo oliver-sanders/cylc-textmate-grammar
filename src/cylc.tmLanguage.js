@@ -787,6 +787,7 @@ class Jinja2Comment {
 exports.tmLanguage = {
     scopeName: 'source.cylc',
     $schema: 'https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json',
+    fileTypes: ['suite.rc', 'suite.rc.processed', 'cylc', 'flow.rc', 'flow-tests.rc'],
     name: 'cylc',
     patterns: [
         {include: '#comments'},
