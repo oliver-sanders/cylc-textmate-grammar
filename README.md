@@ -2,7 +2,7 @@
 
 ![test](https://github.com/cylc/cylc-textmate-grammar/workflows/test/badge.svg?branch=master&event=push)
 
-This repository provides a TextMate grammar for Cylc workflow configuration (`suite.rc`) files, enabling syntax highlighting and other features.
+This repository provides a TextMate grammar for Cylc workflow configuration (`suite.rc` and `.cylc`) files, enabling syntax highlighting and other features.
 
 `cylc.tmLanguage.json` is the grammar file used by plugins for editors:
 - VSCode - [cylc/vscode-cylc](https://github.com/cylc/vscode-cylc)
@@ -147,7 +147,7 @@ npx eslint src/ lib/
 ```
 
 #### Unit tests
-We're using [vscode-tmgrammar-test](https://github.com/PanAeon/vscode-tmgrammar-test) for testing the textmate grammar. Test files reside in the `/tests` directory. These are essentially suite.rc files that are annotated with comments (filenames must match pattern `suite*.rc` or `suite*.rc.*`). The comments detail what the expected scopes of the test line are. The comments are read in by vscode-tmgrammar-test and compared to the actual applied scopes. An example test might be:
+We're using [vscode-tmgrammar-test](https://github.com/PanAeon/vscode-tmgrammar-test) for testing the textmate grammar. Test files reside in the `/tests` directory. These are essentially Cylc workflow files that are annotated with comments. The comments detail what the expected scopes of the test line are. The comments are read in by vscode-tmgrammar-test and compared to the actual applied scopes. An example test might be:
 ```ini
     foo = bar
 #   ^^^       variable.other.key.cylc
