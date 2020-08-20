@@ -5,6 +5,7 @@
         "suite.rc",
         "suite.rc.processed",
         "cylc",
+        "cylc.processed",
         "flow.rc",
         "flow-tests.rc"
     ],
