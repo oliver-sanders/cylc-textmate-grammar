@@ -18,6 +18,21 @@ It is also used to build a TextMate bundle at [cylc/Cylc.tmLanguage](https://git
 
 If you're using an editor listed above, follow the link next to it for instructions. If not, check [cylc/cylc-flow/issues/2752](https://github.com/cylc/cylc-flow/issues/2752) for support.
 
+## Copyright and Terms of Use
+
+Copyright (C) 2008-<span actions:bind='current-year'>2021</span> NIWA & British Crown (Met Office) & Contributors.
+
+Cylc is free software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
+
+Cylc is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+Cylc.  If not, see [GNU licenses](http://www.gnu.org/licenses/).
+
 ## Contributing
 
 **Note:** the `cylc.tmLanguage.json` file is generated from the JavaScript file(s) in `src/`. Contributors should edit the JavaScript files, **not** the JSON file; the JSON file should only be generated using the build script (using [node](https://nodejs.org/en/)).
