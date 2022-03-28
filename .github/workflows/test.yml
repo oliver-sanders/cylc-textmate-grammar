@@ -16,13 +16,13 @@ jobs:
     steps:
     # Checkout your repository under $GITHUB_WORKSPACE, so your job can access it:
     - name: Checkout repo
-      uses: actions/checkout@v2.1.0
-    
+      uses: actions/checkout@v3
+
     - name: Setup Node.js environment
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: '14.16.x'
-    
+        node-version: '14' # Cannot use 16 - https://github.com/npm/cli/issues/3555
+
     - name: Install (dev) dependencies
       run: npm install
 
@@ -36,6 +36,6 @@ jobs:
 
     - name: Check grammar file matches build output
       run: diff -Z cylc.tmLanguage.json tmLang_copy.json
-    
+
     - name: Unit tests
       run: npm test
