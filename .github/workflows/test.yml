@@ -27,7 +27,7 @@ jobs:
       run: npm install
 
     - name: Style test
-      run: npx eslint src/ lib/
+      run: npm run lint
 
     - name: Build
       run: |
