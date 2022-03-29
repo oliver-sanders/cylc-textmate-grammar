@@ -158,7 +158,7 @@ npm install
 #### Style tests
 To run ESLint for style testing JavaScript files:
 ```
-npx eslint src/ lib/
+npm run lint
 ```
 
 #### Unit tests
