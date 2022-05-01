@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/cylc/cylc-textmate-grammar#readme",
   "devDependencies": {
-    "eslint": "^8.12.0",
+    "eslint": "^8.14.0",
     "vscode-tmgrammar-test": "^0.0.11"
   }
 }
