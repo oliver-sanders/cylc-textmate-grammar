@@ -4,7 +4,7 @@
   "description": "TextMate grammar for Cylc worflow configuration files",
   "scripts": {
     "build": "node lib/build.js",
-    "test": "npx vscode-tmgrammar-test -s 'source.cylc' -g cylc.tmLanguage.json -t 'tests/*'",
+    "test": "npx vscode-tmgrammar-test -g cylc.tmLanguage.json 'tests/*'",
     "lint": "eslint src/ lib/"
   },
   "repository": {
@@ -19,6 +19,6 @@
   "homepage": "https://github.com/cylc/cylc-textmate-grammar#readme",
   "devDependencies": {
     "eslint": "^8.14.0",
-    "vscode-tmgrammar-test": "^0.0.11"
+    "vscode-tmgrammar-test": "^0.1.1"
   }
 }
