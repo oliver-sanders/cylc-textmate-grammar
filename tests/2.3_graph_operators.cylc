@@ -34,7 +34,12 @@ graph = """
 
 ## Not suicide
     foo!bar => ! foo
-#      ^             - keyword.other.suicide.cylc
-#              ^     - keyword.other.suicide.cylc
 
+## Optional outputs
+    foo? => bar:fail? => baz?=> pub ?
+#      ^            ^       ^       ^  keyword.other.optional-output.cylc
+
+## Invalid optional outputs
+    ?foo => bar?:fail
+#   ^          ^      - keyword.other.optional-output.cylc
 """

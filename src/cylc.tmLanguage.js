@@ -323,6 +323,10 @@ class GraphSyntax {
                 }
             },
             {
+                name: 'keyword.other.optional-output.cylc',
+                match: `(?<=\\w\\s*)\\?(?=[\\s=])`,
+            },
+            {
                 name: 'variable.other.xtrigger.cylc',
                 match: '(@)[\\w\\-]+',
                 captures: {
