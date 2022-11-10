@@ -6,8 +6,7 @@ graph = """
 ## Operators
     foo | bar & baz => pub & qux
 #       ^                        keyword.other.logical.cylc
-#             ^                  keyword.other.logical.cylc
-#                          ^     keyword.other.logical.cylc
+#             ^            ^     keyword.other.logical.cylc
 
 ## Without spaces
     foo&bar => pub
@@ -23,17 +22,17 @@ graph = """
 
 ## Suicide
     foo => !foo &!bar =>
-#          ^          keyword.other.suicide.cylc
+#          ^     ^    keyword.other.suicide.cylc
 #           ^^^       meta.variable.task.cylc
 #          ^^^^       meta.variable.suicide.cylc
 #               ^     keyword.other.logical.cylc
-#                ^    keyword.other.suicide.cylc
 !qux =>!pub
 # <-        keyword.other.suicide.cylc
 #      ^    keyword.other.suicide.cylc
 
-## Not suicide
+## Invalid suicide
     foo!bar => ! foo
+#      ^       ^      - keyword.other.suicide.cylc
 
 ## Optional outputs
     foo? => bar:fail? => baz?=> pub ?
