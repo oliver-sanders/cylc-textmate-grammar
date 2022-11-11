@@ -36,9 +36,11 @@ graph = """
 
 ## Optional outputs
     foo? => bar:fail? => baz?=> pub ?
-#      ^            ^       ^       ^  keyword.other.optional-output.cylc
+#      ^            ^       ^       ^ keyword.other.optional-output.cylc
+    foo?&bar => baz<x>? => pub:custom-2?
+#      ^              ^                ^ keyword.other.optional-output.cylc
 
 ## Invalid optional outputs
-    ?foo => bar?:fail
-#   ^          ^      - keyword.other.optional-output.cylc
+    ?foo =>?bar => baz?pub => qux?:fail
+#   ^      ^          ^          ^      - keyword.other.optional-output.cylc
 """

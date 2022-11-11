@@ -292,6 +292,7 @@ class GraphSection8 extends GraphSection7 {
 class GraphSyntax {
     constructor() {
         const task = new Task();
+        const qualifier = new TaskQualifier();
         this.patterns = [
             {include: '#comments'},
             {include: '#parameterizations'},
@@ -329,7 +330,11 @@ class GraphSyntax {
             },
             {
                 name: 'keyword.other.optional-output.cylc',
-                match: `(?<=\\w\\s*)\\?(?=[\\s=])`,
+                match: [
+                    `(?<=(${task.regex}|${qualifier.regex}|<.*>) *)`,
+                    `\\?`,
+                    `(?![:\\w])`,
+                ].join('')
             },
             {
                 name: 'variable.other.xtrigger.cylc',
