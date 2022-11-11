@@ -79,14 +79,18 @@ R1 = """
     # SYNTAX: 2.3
     # &|() should be highlighted
     # !foo should be highlighted
+    # foo?, foo:fail? should be highlighted
     foo | bar & baz => pub & qux
     (foo | bar) & baz => pub & qux
     (foo & bar) =>
 !qux
     foo => !foo &!bar =>!pub
+    foo? => bar:fail? => baz?=> pub
     # ! foo or foo!bar should NOT be highlighted:
     ! foo
     foo!bar
+    # ?foo or foo?:fail should NOT be highlighted:
+    ?foo => bar?:fail => baz:?fail
 
     # SYNTAX: 2.4
     # text inside <> should be highlighted
@@ -123,7 +127,7 @@ R1 = """
 
     # multiple parameters:
     foo<x=bar, y = 2> => foo<baz,4>
-    
+
     a<x = 1s, y-1s> # '1s' not number
 
     # SYNTAX: 2.9
@@ -219,7 +223,7 @@ graph = """
 """
 
 # But not these:
-graph = 
+graph =
     foo => bar
 graph = "
     foo => bar
