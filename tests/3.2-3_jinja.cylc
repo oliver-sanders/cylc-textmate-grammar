@@ -97,3 +97,9 @@ graph = """
 [[graph]]
     {{ a }} = foo => bar
 #   ^^^^^^^              meta.embedded.block.jinja source.jinja
+
+[scheduler]
+## Inside a Cylc comment (it still gets executed at parse-time)
+    # blah {% set x = 14 %} blah {{ x }}
+#   ^^^^^^^                ^^^^^^        comment.line.cylc
+#          ^^^^^^^^^^^^^^^^      ^^^^^^^ meta.embedded.block.jinja source.jinja

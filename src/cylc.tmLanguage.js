@@ -86,10 +86,15 @@ class LineComment {
     constructor() {
         this.pattern = {
             name: 'comment.line.cylc',
-            match: '(#).*',
-            captures: {
-                1: {name: 'punctuation.definition.comment.cylc'}
-            }
+            begin: '#',
+            end: '(?=[\\n\\r])',
+            beginCaptures: {
+                0: {name: 'punctuation.definition.comment.cylc'}
+            },
+            patterns: [
+                // Jinja2 in comment still gets executed at parse-time
+                {include: '#jinja2'}
+            ]
         };
     }
 }

@@ -497,12 +497,18 @@
             "patterns": [
                 {
                     "name": "comment.line.cylc",
-                    "match": "(#).*",
-                    "captures": {
-                        "1": {
+                    "begin": "#",
+                    "end": "(?=[\\n\\r])",
+                    "beginCaptures": {
+                        "0": {
                             "name": "punctuation.definition.comment.cylc"
                         }
-                    }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#jinja2"
+                        }
+                    ]
                 }
             ]
         },
