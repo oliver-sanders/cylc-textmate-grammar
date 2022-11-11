@@ -13,9 +13,8 @@
     {{ foo_bar }}  {{ foo | bar(1, 2, 3) }}
 #   ^^                                      punctuation.definition.template-expression.begin.jinja
 #              ^^                           punctuation.definition.template-expression.end.jinja
-#   ^^^^^^^^^^^^^                           meta.embedded.block.jinja source.jinja
+#   ^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
 #                ^^                         - meta.embedded.block.jinja source.jinja
-#                  ^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.block.jinja source.jinja
 
     {% set foo = {"1": 2, "3", {"1": 2}} %}
 #                                     ^^    - punctuation.definition.template-expression.end.jinja
@@ -47,9 +46,8 @@
 
 ## Whitespace control
     {%+ foo -%} {%- foo %}
-#   ^^^                    punctuation.definition.template-expression.begin.jinja
+#   ^^^         ^^^        punctuation.definition.template-expression.begin.jinja
 #           ^^^            punctuation.definition.template-expression.end.jinja
-#               ^^^        punctuation.definition.template-expression.begin.jinja
 
 
 ## Inside Cylc syntax patterns
@@ -81,17 +79,13 @@ graph = """
 #            ^^^^^^^ meta.embedded.block.jinja source.jinja
 
     foo<{{ a }}> & bar<x={{ b }}>
-#       ^^^^^^^                   meta.embedded.block.jinja source.jinja
-#                         ^^^^^^  meta.embedded.block.jinja source.jinja
+#       ^^^^^^^          ^^^^^^^  meta.embedded.block.jinja source.jinja
 
     foo:{{ a }} & bar:custom_{{ b }} & {{ c }}:fail
-#       ^^^^^^^                                     meta.embedded.block.jinja source.jinja
-#                            ^^^^^^^                meta.embedded.block.jinja source.jinja
-#                                      ^^^^^^^      meta.embedded.block.jinja source.jinja
+#       ^^^^^^^              ^^^^^^^   ^^^^^^^      meta.embedded.block.jinja source.jinja
 
     foo[{{ a }}] & bar[-P{{ b }}]
-#       ^^^^^^^                   meta.embedded.block.jinja source.jinja
-#                        ^^^^^^^  meta.embedded.block.jinja source.jinja
+#       ^^^^^^^          ^^^^^^^  meta.embedded.block.jinja source.jinja
 """
 
 [[graph]]
