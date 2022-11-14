@@ -86,10 +86,15 @@ class LineComment {
     constructor() {
         this.pattern = {
             name: 'comment.line.cylc',
-            match: '(#).*',
-            captures: {
-                1: {name: 'punctuation.definition.comment.cylc'}
-            }
+            begin: '#',
+            end: '(?=[\\n\\r])',
+            beginCaptures: {
+                0: {name: 'punctuation.definition.comment.cylc'}
+            },
+            patterns: [
+                // Jinja2 in comment still gets executed at parse-time
+                {include: '#jinja2'}
+            ]
         };
     }
 }
@@ -287,6 +292,7 @@ class GraphSection8 extends GraphSection7 {
 class GraphSyntax {
     constructor() {
         const task = new Task();
+        const qualifier = new TaskQualifier();
         this.patterns = [
             {include: '#comments'},
             {include: '#parameterizations'},
@@ -324,7 +330,11 @@ class GraphSyntax {
             },
             {
                 name: 'keyword.other.optional-output.cylc',
-                match: `(?<=\\w\\s*)\\?(?=[\\s=])`,
+                match: [
+                    `(?<=(${task.regex}|${qualifier.regex}|<.*>) *)`,
+                    `\\?`,
+                    `(?![:\\w])`,
+                ].join('')
             },
             {
                 name: 'variable.other.xtrigger.cylc',

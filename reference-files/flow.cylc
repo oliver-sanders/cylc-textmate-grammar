@@ -85,12 +85,12 @@ R1 = """
     (foo & bar) =>
 !qux
     foo => !foo &!bar =>!pub
-    foo? => bar:fail? => baz?=> pub
-    # ! foo or foo!bar should NOT be highlighted:
+    foo? => bar:fail? => baz?=> pub<x>?
+    # ! or ? should NOT be highlighted:
     ! foo
     foo!bar
-    # ?foo or foo?:fail should NOT be highlighted:
-    ?foo => bar?:fail => baz:?fail
+    ?foo =>?bar
+    foo?:bar
 
     # SYNTAX: 2.4
     # text inside <> should be highlighted
