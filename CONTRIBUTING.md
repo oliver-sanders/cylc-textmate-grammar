@@ -28,6 +28,7 @@ below:
 
 <!-- start-shortlog -->
  - Oliver Sanders
+ - Bruno Kinoshita
 <!-- end-shortlog -->
 
 (All contributors are identifiable with email addresses in the git version
