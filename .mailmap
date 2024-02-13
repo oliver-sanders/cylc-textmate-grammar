@@ -1,7 +1,8 @@
-# FORMAT: <proper-name>  <proper-email>  <commit-name>  <commit-email>   
+# FORMAT: <proper-name>  <proper-email>  <commit-name>  <commit-email>
 # Omit commit-name or commit-email if same as proper
 
 Bruno Kinoshita            <kinow@apache.org>                                       <bruno.kinoshita@niwa.co.nz>
 Bruno Kinoshita            <kinow@apache.org>                                       <brunodepaulak@yahoo.com.br>
 Bruno Kinoshita            <kinow@apache.org>                                       <kinow@users.noreply.github.com>
 Oliver Sanders             <oliver.sanders@metoffice.gov.uk>    Oliver sanders
+Ronnie Dutta               <61982285+MetRonnie@users.noreply.github.com>
