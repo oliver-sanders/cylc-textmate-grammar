@@ -27,6 +27,7 @@ the Contributor Licence Agreement and Certificate of Origin detailed
 below:
 
 <!-- start-shortlog -->
+ - Oliver Sanders
 <!-- end-shortlog -->
 
 (All contributors are identifiable with email addresses in the git version
