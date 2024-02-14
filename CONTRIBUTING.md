@@ -27,6 +27,7 @@ the Contributor Licence Agreement and Certificate of Origin detailed
 below:
 
 <!-- start-shortlog -->
+ - Ronnie Dutta
  - Oliver Sanders
  - Bruno Kinoshita
 <!-- end-shortlog -->
