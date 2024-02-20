@@ -30,6 +30,7 @@ below:
  - Ronnie Dutta
  - Oliver Sanders
  - Bruno Kinoshita
+ - Tim Pillinger
 <!-- end-shortlog -->
 
 (All contributors are identifiable with email addresses in the git version
