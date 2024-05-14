@@ -60,8 +60,11 @@ jobs:
 
       - name: Patch
         run: |
+          ref="${{ github.reg }}
+          ref=${ref/refs\/heads\/}
+          echo ref=$ref
           line='git submodule add'
-          sed -i "s|$line|$line -b ${{ github.ref }}|" linguist/script/add-grammar
+          sed -i "s|$line|$line -b $ref|" linguist/script/add-grammar
 
       - name: Install
         run: |
