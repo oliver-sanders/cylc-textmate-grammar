@@ -77,7 +77,7 @@ jobs:
           # line='git submodule add'
           # sed -i "s|$line|$line -b $ref|" linguist/script/add-grammar
           
-          URL="file://$PWD/cylc-textmate-grammar"
+          URL="$PWD/cylc-textmate-grammar"
           line='git submodule add -f "$url"'
           sed -i "s|$line|git submodule add -f $URL|" linguist/script/add-grammar
 
