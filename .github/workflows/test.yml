@@ -51,7 +51,8 @@ jobs:
 
       - name: checkout
         uses: actions/checkout@v1
-        repository: github-linguist/linguist
+        with:
+          repository: github-linguist/linguist
 
       - name: Patch
         run: |
