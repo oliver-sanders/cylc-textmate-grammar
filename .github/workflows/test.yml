@@ -65,6 +65,9 @@ jobs:
           mkdir syntax
           cp cylc.tmLanguage.json syntax/
           git add syntax/cylc.tmLanguage.json
+          mkdir Syntaxes
+          cp cylc.tmLanguage.json Syntaxes/
+          git add Syntaxes/cylc.tmLanguage.json
           git commit -m '.'
 
       - name: Debug
