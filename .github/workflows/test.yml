@@ -54,6 +54,9 @@ jobs:
         with:
           path: cylc-textmate-grammar
 
+      - name: Configure git  # Needed by the odd test
+        uses: cylc/release-actions/configure-git@v1
+
       - name: bundleify
         run: |
           # mkdir syntax
