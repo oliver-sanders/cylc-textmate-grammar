@@ -60,7 +60,7 @@ jobs:
 
       - name: Patch
         run: |
-          ref="${{ github.reg }}
+          ref="${{ github.ref }}"
           ref=${ref/refs\/heads\/}
           echo ref=$ref
           line='git submodule add'
