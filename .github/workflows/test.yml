@@ -87,39 +87,43 @@ jobs:
           ls
           tree -L 3
 
-      - name: Patch
+      - name: Lint
         run: |
-          ref="${{ github.ref }}"
-          ref=${ref/refs\/heads\/}
-          echo ref=$ref
+          linguist/script/grammar-compiler add cylc-textmate-grammar/
 
-          # line='git submodule add'
-          # sed -i "s|$line|$line -b $ref|" linguist/script/add-grammar
-          
-          URL="$PWD/cylc-textmate-grammar"
-          line='git submodule add -f "$url"'
-          sed -i "s|$line|git -c protocol.file.allow=always submodule add -f $URL|" linguist/script/add-grammar
-          sed -i "s|^.*script/normalise-url.*$|url=$URL|" linguist/script/add-grammar
+          # - name: Patch
+          #   run: |
+          #     ref="${{ github.ref }}"
+          #     ref=${ref/refs\/heads\/}
+          #     echo ref=$ref
 
-      - name: Build
-        run: |
-          cd cylc-textmate-grammar
-          mv cylc.tmLanguage.json tmLang_copy.json
-          npm run build
+          #     # line='git submodule add'
+          #     # sed -i "s|$line|$line -b $ref|" linguist/script/add-grammar
+          #     
+          #     URL="$PWD/cylc-textmate-grammar"
+          #     line='git submodule add -f "$url"'
+          #     sed -i "s|$line|git -c protocol.file.allow=always submodule add -f $URL|" linguist/script/add-grammar
+          #     sed -i "s|^.*script/normalise-url.*$|url=$URL|" linguist/script/add-grammar
 
-      - name: Install
-        run: |
-          sudo gem install bundler
+          # - name: Build
+          #   run: |
+          #     cd cylc-textmate-grammar
+          #     mv cylc.tmLanguage.json tmLang_copy.json
+          #     npm run build
 
-      - name: Add Cylc
-        run: |
-          URL="$PWD/cylc-textmate-grammar"
-          set -x
-          cd linguist
-          script/add-grammar "arg-ignored"
-          script/update-ids
+          # - name: Install
+          #   run: |
+          #     sudo gem install bundler
 
-      - name: Debug2
-        if: always()
-        run: |
-          tree linguist/vendor/grammars/cylc-textmate-grammar
+          # - name: Add Cylc
+          #   run: |
+          #     URL="$PWD/cylc-textmate-grammar"
+          #     set -x
+          #     cd linguist
+          #     script/add-grammar "arg-ignored"
+          #     script/update-ids
+
+          # - name: Debug2
+          #   if: always()
+          #   run: |
+          #     tree linguist/vendor/grammars/cylc-textmate-grammar
