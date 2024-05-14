@@ -58,7 +58,7 @@ jobs:
       - name: Patch
         run: |
           line='git submodule add -f "$url" "$path"'
-          sed -i script/update-ids "s|$line|$line -b ${{ github.ref }}|"
+          sed -i "s|$line|$line -b ${{ github.ref }}|" script/add-grammar
 
       - name: Install
         run: |
