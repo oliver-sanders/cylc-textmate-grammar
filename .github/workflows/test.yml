@@ -42,18 +42,22 @@ jobs:
   linguist:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug
-        run: |
-          echo "
-          ref: ${{ github.ref }}
-          repository: ${{ github.repository }}
-          "
+
 
       - name: checkout
         uses: actions/checkout@v1
         with:
           repository: github-linguist/linguist
           ref: master
+
+      - name: Debug
+        run: |
+          echo "
+          ref: ${{ github.ref }}
+          repository: ${{ github.repository }}
+          "
+          ls
+          tree -L 3
 
       - name: Patch
         run: |
