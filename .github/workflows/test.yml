@@ -99,3 +99,8 @@ jobs:
           cd linguist
           script/add-grammar "arg-ignored"
           script/update-ids
+
+      - name: Debug2
+        if: always()
+        run: |
+          tree vendor/grammars/cylc-textmate-grammar
