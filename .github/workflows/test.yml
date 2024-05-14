@@ -42,12 +42,22 @@ jobs:
   linguist:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: checkout linguist
         uses: actions/checkout@v4
         with:
           repository: github-linguist/linguist
           ref: master
           path: linguist
+
+      - name: checkout cylc-textmate-grammar
+        uses: actions/checkout@v4
+        with:
+          path: cylc-textmate-grammar
+
+      - name: bundleify
+        run: |
+          mkdir syntax
+          cp src/cylc.tmLanguage.js syntax/
 
       - name: Debug
         run: |
@@ -58,13 +68,13 @@ jobs:
           ls
           tree -L 3
 
-      - name: Patch
-        run: |
-          ref="${{ github.ref }}"
-          ref=${ref/refs\/heads\/}
-          echo ref=$ref
-          line='git submodule add'
-          sed -i "s|$line|$line -b $ref|" linguist/script/add-grammar
+          # - name: Patch
+          #   run: |
+          #     ref="${{ github.ref }}"
+          #     ref=${ref/refs\/heads\/}
+          #     echo ref=$ref
+          #     line='git submodule add'
+          #     sed -i "s|$line|$line -b $ref|" linguist/script/add-grammar
 
       - name: Install
         run: |
@@ -74,5 +84,6 @@ jobs:
         run: |
           set +x
           cd linguist
-          script/add-grammar https://github.com/${{ github.repository }}
+          # script/add-grammar https://github.com/${{ github.repository }}
+          script/add-grammar "$PWD/cylc-textmate-grammar"
           script/update-ids
