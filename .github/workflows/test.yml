@@ -80,6 +80,13 @@ jobs:
           URL="$PWD/cylc-textmate-grammar"
           line='git submodule add -f "$url"'
           sed -i "s|$line|git submodule add -f $URL|" linguist/script/add-grammar
+          sed -i 's|^.*script/normalise-url.*$||' linguist/script/add-grammar
+
+      - name: Build
+        run: |
+          cd cylc-textmate-grammar
+          mv cylc.tmLanguage.json tmLang_copy.json
+          npm run build
 
       - name: Install
         run: |
