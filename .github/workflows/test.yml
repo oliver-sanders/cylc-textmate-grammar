@@ -64,9 +64,11 @@ jobs:
           cd cylc-textmate-grammar
           mkdir syntax
           cp cylc.tmLanguage.json syntax/
+          cp cylc.tmLanguage.json syntax/cylc-textmate-grammar.tmLanguage.json
           git add syntax/cylc.tmLanguage.json
           mkdir Syntaxes
           cp cylc.tmLanguage.json Syntaxes/
+          cp cylc.tmLanguage.json Syntaxes/cylc-textmate-grammar.tmLanguage.json
           git add Syntaxes/cylc.tmLanguage.json
           git commit -m '.'
 
