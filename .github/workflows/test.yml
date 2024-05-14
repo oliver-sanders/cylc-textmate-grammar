@@ -58,7 +58,7 @@ jobs:
       - name: Patch
         run: |
           line='git submodule add -f "$url" "$path"'
-          sed -i "s|$line|$line -b ${{ github.ref }}|" script/add-grammar
+          sed -i "s|$line|$line -b ${{ github.ref }}|" linguist/script/add-grammar
 
       - name: Install
         run: |
@@ -67,5 +67,5 @@ jobs:
       - name: Add Cylc
         run: |
           set +x
-          script/add-grammar https://github.com/${{ github.repository }}
-          script/update-ids
+          linguist/script/add-grammar https://github.com/${{ github.repository }}
+          linguist/script/update-ids
