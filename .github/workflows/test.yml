@@ -70,5 +70,6 @@ jobs:
       - name: Add Cylc
         run: |
           set +x
-          linguist/script/add-grammar https://github.com/${{ github.repository }}
-          linguist/script/update-ids
+          cd linguist
+          script/add-grammar https://github.com/${{ github.repository }}
+          script/update-ids
