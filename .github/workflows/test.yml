@@ -61,6 +61,8 @@ jobs:
           cd cylc-textmate-grammar
           mkdir syntax
           cp cylc.tmLanguage.json syntax/
+          git add syntax/cylc.tmLanguage.json
+          git commit -m '.'
 
       - name: Debug
         run: |
