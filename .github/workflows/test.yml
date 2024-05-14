@@ -45,7 +45,7 @@ jobs:
       - name: Debug
         run: |
           echo "
-          base-ref: ${{ github.base_ref }}
+          ref: ${{ github.ref }}
           repository: ${{ github.repository }}
           "
 
@@ -58,7 +58,7 @@ jobs:
       - name: Patch
         run: |
           line='git submodule add -f "$url" "$path"'
-          sed -i script/update-ids "s|$line|$line -b ${{ github.base_ref }}|"
+          sed -i script/update-ids "s|$line|$line -b ${{ github.ref }}|"
 
       - name: Install
         run: |
