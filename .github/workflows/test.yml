@@ -103,4 +103,4 @@ jobs:
       - name: Debug2
         if: always()
         run: |
-          tree vendor/grammars/cylc-textmate-grammar
+          tree linguist/vendor/grammars/cylc-textmate-grammar
