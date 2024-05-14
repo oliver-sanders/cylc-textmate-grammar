@@ -62,14 +62,20 @@ jobs:
           # mkdir syntax
           # cp cylc-textmate-grammar/src/cylc.tmLanguage.js syntax/
           cd cylc-textmate-grammar
+
+          cp cylc.tmLanguage.json cylc-textmate-grammar.tmLanguage.json
+          git add cylc-textmate-grammar.tmLanguage.json
+
           mkdir syntax
           cp cylc.tmLanguage.json syntax/
           cp cylc.tmLanguage.json syntax/cylc-textmate-grammar.tmLanguage.json
           git add syntax/*
+
           mkdir Syntaxes
           cp cylc.tmLanguage.json Syntaxes/
           cp cylc.tmLanguage.json Syntaxes/cylc-textmate-grammar.tmLanguage.json
           git add Syntaxes/*
+
           git commit -m '.'
 
       - name: Debug
