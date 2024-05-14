@@ -60,7 +60,7 @@ jobs:
 
       - name: Patch
         run: |
-          line='git submodule add -f "$url" "$path"'
+          line='git submodule add'
           sed -i "s|$line|$line -b ${{ github.ref }}|" linguist/script/add-grammar
 
       - name: Install
