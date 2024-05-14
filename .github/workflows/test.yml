@@ -68,13 +68,18 @@ jobs:
           ls
           tree -L 3
 
-          # - name: Patch
-          #   run: |
-          #     ref="${{ github.ref }}"
-          #     ref=${ref/refs\/heads\/}
-          #     echo ref=$ref
-          #     line='git submodule add'
-          #     sed -i "s|$line|$line -b $ref|" linguist/script/add-grammar
+      - name: Patch
+        run: |
+          ref="${{ github.ref }}"
+          ref=${ref/refs\/heads\/}
+          echo ref=$ref
+
+          # line='git submodule add'
+          # sed -i "s|$line|$line -b $ref|" linguist/script/add-grammar
+          
+          URL="file://$PWD/cylc-textmate-grammar"
+          line='git submodule add -f "$url"'
+          sed -i "s|$line|git submodule add -f $URL|" linguist/script/add-grammar
 
       - name: Install
         run: |
@@ -82,9 +87,7 @@ jobs:
 
       - name: Add Cylc
         run: |
-          URL="file://$PWD/cylc-textmate-grammar"
           set +x
           cd linguist
-          # script/add-grammar https://github.com/${{ github.repository }}
-          script/add-grammar "$URL"
+          script/add-grammar ${{ github.repository }}
           script/update-ids
