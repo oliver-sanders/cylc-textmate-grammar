@@ -57,7 +57,7 @@ jobs:
       - name: bundleify
         run: |
           mkdir syntax
-          cp src/cylc.tmLanguage.js syntax/
+          cp cylc-textmate-grammar/src/cylc.tmLanguage.js syntax/
 
       - name: Debug
         run: |
