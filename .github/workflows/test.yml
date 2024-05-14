@@ -7,15 +7,12 @@ on:
   pull_request:
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel:
 jobs:
-  # This workflow contains a single job called "test":
+  # run Cylc tests
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    # Steps represent a sequence of tasks that will be executed as part of the job:
     steps:
-    # Checkout your repository under $GITHUB_WORKSPACE, so your job can access it:
     - name: Checkout repo
       uses: actions/checkout@v4
 
@@ -40,3 +37,33 @@ jobs:
 
     - name: Unit tests
       run: npm test
+
+  # run Linguist tests
+  linguist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        run: |
+          echo "
+          base-ref: ${{ github.base_ref }}
+          repository: ${{ github.repository }}
+          "
+
+      - name: checkout
+        uses: actions/checkout@v1
+        repository: github-linguist/linguist
+
+      - name: Patch
+        run: |
+          line='git submodule add -f "$url" "$path"'
+          sed -i script/update-ids "s|$line|$line -b ${{ github.base_ref }}|"
+
+      - name: Install
+        run: |
+          sudo gem install bundler
+
+      - name: Add Cylc
+        run: |
+          set +x
+          script/add-grammar https://github.com/${{ github.repository }}
+          script/update-ids
