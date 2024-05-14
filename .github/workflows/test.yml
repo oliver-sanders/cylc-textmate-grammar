@@ -82,7 +82,7 @@ jobs:
 
       - name: Add Cylc
         run: |
-          URL="$PWD/cylc-textmate-grammar"
+          URL="file://$PWD/cylc-textmate-grammar"
           set +x
           cd linguist
           # script/add-grammar https://github.com/${{ github.repository }}
