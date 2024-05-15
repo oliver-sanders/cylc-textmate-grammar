@@ -87,9 +87,15 @@ jobs:
           ls
           tree -L 3
 
+      - name: Debug2
+        run: |
+          set -x
+          linguist/script/grammar-compiler --help || true
+          linguist/script/grammar-compiler add --help || true
+
       - name: Lint
         run: |
-          linguist/script/grammar-compiler add cylc-textmate-grammar/
+          linguist/script/grammar-compiler add cylc-textmate-grammar
 
           # - name: Patch
           #   run: |
