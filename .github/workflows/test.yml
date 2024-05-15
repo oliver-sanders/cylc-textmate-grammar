@@ -81,6 +81,10 @@ jobs:
           cp cylc.tmLanguage.json syntaxes/cylc-textmate-grammar.tmLanguage.json
           git add syntaxes/*
 
+          echo "$PWD"
+          echo "$PWD/syntaxes"
+          ls "$PWD/syntaxes" || true
+
           git commit -m '.'
 
       - name: Debug
@@ -127,6 +131,16 @@ jobs:
         if: always()
         run: |
           linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/syntaxes/cylc-textmate-grammar.tmLanguage.json
+
+      - name: Lint5
+        if: always()
+        run: |
+          set -x
+          cd cylc-textmate-grammar
+          ../linguist/script/grammar-compiler add . || true
+          ../linguist/script/grammar-compiler add syntaxes || true
+          ../linguist/script/grammar-compiler add syntaxes/ || true
+          ../linguist/script/grammar-compiler add syntaxes/cylc-textmate-grammar.tmLanguage.json || true
 
 
 
