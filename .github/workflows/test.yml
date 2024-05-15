@@ -109,13 +109,20 @@ jobs:
         run: |
           set -x
           cd cylc-textmate-grammar
+          ls || true
           ../linguist/script/grammar-compiler add . || true
           ../linguist/script/grammar-compiler add $PWD || true
           ../linguist/script/grammar-compiler add syntaxes || true
           ../linguist/script/grammar-compiler add syntaxes/ || true
           ../linguist/script/grammar-compiler add syntaxes/cylc-textmate-grammar.tmLanguage.json || true
-          ../linguist/script/grammar-compiler add /home/runner/work/cylc-textmate-grammar/cylc-textmate-grammar/cylc-textmate-grammar/syntaxes
+          ../linguist/script/grammar-compiler add /home/runner/work/cylc-textmate-grammar/cylc-textmate-grammar/cylc-textmate-grammar/syntaxes || true
           ../linguist/script/grammar-compiler add /home/runner/work/cylc-textmate-grammar/cylc-textmate-grammar/cylc-textmate-grammar/syntaxes/cylc-textmate-grammar.tmLanguage.json
+
+            cd syntaxes
+          ls || true
+          ../linguist/script/grammar-compiler add . || true
+          ../linguist/script/grammar-compiler add $PWD || true
+          ../linguist/script/grammar-compiler add cylc-textmate-grammar.tmLanguage.json || true
 
 
 
