@@ -93,9 +93,29 @@ jobs:
           linguist/script/grammar-compiler --help || true
           linguist/script/grammar-compiler add --help || true
 
-      - name: Lint
+      - name: Lint1
         run: |
           linguist/script/grammar-compiler add cylc-textmate-grammar
+
+      - name: Lint2
+        if: always()
+        run: |
+          linguist/script/grammar-compiler add ./cylc-textmate-grammar
+
+      - name: Lint3
+        if: always()
+        run: |
+          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar
+
+      - name: Lint4
+        if: always()
+        run: |
+          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/Syntaxes
+
+      - name: Lint5
+        if: always()
+        run: |
+          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/Syntaxes/cylc-textmate-grammar.tmLanguage.json
 
           # - name: Patch
           #   run: |
