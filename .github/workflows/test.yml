@@ -76,6 +76,11 @@ jobs:
           cp cylc.tmLanguage.json Syntaxes/cylc-textmate-grammar.tmLanguage.json
           git add Syntaxes/*
 
+          mkdir syntaxes
+          cp cylc.tmLanguage.json syntaxes/
+          cp cylc.tmLanguage.json syntaxes/cylc-textmate-grammar.tmLanguage.json
+          git add syntaxes/*
+
           git commit -m '.'
 
       - name: Debug
@@ -96,58 +101,33 @@ jobs:
       - name: Lint1
         if: always()
         run: |
-          PATH=cylc-textmate-grammar/
-          tree $PATH
-          linguist/script/grammar-compiler add $PATH
+          linguist/script/grammar-compiler add cylc-textmate-grammar
 
       - name: Lint2
         if: always()
         run: |
-          PATH=./cylc-textmate-grammar/
-          tree $PATH
-          linguist/script/grammar-compiler add $PATH
+          linguist/script/grammar-compiler add cylc-textmate-grammar/
 
       - name: Lint3
         if: always()
         run: |
-          PATH=./cylc-textmate-grammar/Syntaxes
-          tree $PATH
-          linguist/script/grammar-compiler add $PATH
+          linguist/script/grammar-compiler add ./cylc-textmate-grammar/
 
       - name: Lint4
         if: always()
         run: |
-          PATH=./cylc-textmate-grammar/Syntaxes
-          tree $PATH
-          linguist/script/grammar-compiler add $PATH
+          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/
 
       - name: Lint5
         if: always()
         run: |
-          PATH=$PWD/cylc-textmate-grammar/Syntaxes
-          tree $PATH
-          linguist/script/grammar-compiler add $PATH
+          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/syntaxes
 
-      - name: Lint6
+      - name: Lint5
         if: always()
         run: |
-          PATH=$PWD/cylc-textmate-grammar/Syntaxes/
-          tree $PATH
-          linguist/script/grammar-compiler add $PATH
+          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/syntaxes/cylc-textmate-grammar.tmLanguage.json
 
-      - name: Lint7
-        if: always()
-        run: |
-          PATH=$PWD/cylc-textmate-grammar/
-          tree $PATH
-          linguist/script/grammar-compiler add $PATH
-
-      - name: Lint8
-        if: always()
-        run: |
-          PATH=$PWD/cylc-textmate-grammar/cylc-textmate-grammar.tmLanguage.json
-          tree $PATH
-          linguist/script/grammar-compiler add $PATH
 
 
 
