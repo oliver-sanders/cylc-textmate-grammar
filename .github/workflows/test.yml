@@ -59,6 +59,7 @@ jobs:
 
       - name: bundleify
         run: |
+          set -x
           # mkdir syntax
           # cp cylc-textmate-grammar/src/cylc.tmLanguage.js syntax/
           cd cylc-textmate-grammar
@@ -87,60 +88,34 @@ jobs:
 
           git commit -m '.'
 
-      - name: Debug
-        run: |
-          echo "
-          ref: ${{ github.ref }}
-          repository: ${{ github.repository }}
-          "
-          ls
-          tree -L 3
+          # - name: Debug
+          #   run: |
+          #     echo "
+          #     ref: ${{ github.ref }}
+          #     repository: ${{ github.repository }}
+          #     "
+          #     ls
+          #     tree -L 3
 
       - name: Debug2
         run: |
           set -x
           linguist/script/grammar-compiler --help || true
           linguist/script/grammar-compiler add --help || true
+          ls || true
+          ls cylc-textmate-grammar || true
 
-      - name: Lint1
-        if: always()
-        run: |
-          linguist/script/grammar-compiler add cylc-textmate-grammar
-
-      - name: Lint2
-        if: always()
-        run: |
-          linguist/script/grammar-compiler add cylc-textmate-grammar/
-
-      - name: Lint3
-        if: always()
-        run: |
-          linguist/script/grammar-compiler add ./cylc-textmate-grammar/
-
-      - name: Lint4
-        if: always()
-        run: |
-          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/
-
-      - name: Lint5
-        if: always()
-        run: |
-          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/syntaxes
-
-      - name: Lint5
-        if: always()
-        run: |
-          linguist/script/grammar-compiler add $PWD/cylc-textmate-grammar/syntaxes/cylc-textmate-grammar.tmLanguage.json
-
-      - name: Lint5
-        if: always()
+      - name: Lint
         run: |
           set -x
           cd cylc-textmate-grammar
           ../linguist/script/grammar-compiler add . || true
+          ../linguist/script/grammar-compiler add $PWD || true
           ../linguist/script/grammar-compiler add syntaxes || true
           ../linguist/script/grammar-compiler add syntaxes/ || true
           ../linguist/script/grammar-compiler add syntaxes/cylc-textmate-grammar.tmLanguage.json || true
+          ../linguist/script/grammar-compiler add /home/runner/work/cylc-textmate-grammar/cylc-textmate-grammar/cylc-textmate-grammar/syntaxes
+          ../linguist/script/grammar-compiler add /home/runner/work/cylc-textmate-grammar/cylc-textmate-grammar/cylc-textmate-grammar/syntaxes/cylc-textmate-grammar.tmLanguage.json
 
 
 
