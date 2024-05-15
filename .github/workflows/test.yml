@@ -97,56 +97,56 @@ jobs:
         if: always()
         run: |
           PATH=cylc-textmate-grammar/
-          ls $PATH
+          tree $PATH
           linguist/script/grammar-compiler add $PATH
 
       - name: Lint2
         if: always()
         run: |
           PATH=./cylc-textmate-grammar/
-          ls $PATH
+          tree $PATH
           linguist/script/grammar-compiler add $PATH
 
       - name: Lint3
         if: always()
         run: |
           PATH=./cylc-textmate-grammar/Syntaxes
-          ls $PATH
+          tree $PATH
           linguist/script/grammar-compiler add $PATH
 
       - name: Lint4
         if: always()
         run: |
           PATH=./cylc-textmate-grammar/Syntaxes
-          ls $PATH
+          tree $PATH
           linguist/script/grammar-compiler add $PATH
 
       - name: Lint5
         if: always()
         run: |
           PATH=$PWD/cylc-textmate-grammar/Syntaxes
-          ls $PATH
+          tree $PATH
           linguist/script/grammar-compiler add $PATH
 
       - name: Lint6
         if: always()
         run: |
           PATH=$PWD/cylc-textmate-grammar/Syntaxes/
-          ls $PATH
+          tree $PATH
           linguist/script/grammar-compiler add $PATH
 
       - name: Lint7
         if: always()
         run: |
           PATH=$PWD/cylc-textmate-grammar/
-          ls $PATH
+          tree $PATH
           linguist/script/grammar-compiler add $PATH
 
       - name: Lint8
         if: always()
         run: |
           PATH=$PWD/cylc-textmate-grammar/cylc-textmate-grammar.tmLanguage.json
-          ls $PATH
+          tree $PATH
           linguist/script/grammar-compiler add $PATH
 
 
